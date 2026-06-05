@@ -1,0 +1,10 @@
+Fase,Categoría,Concepto,Cantidad,Unidad,Costo Unitario MXN,Total MXN,Notas
+Piloto (MVP),CapEx,Kits Básicos Electrónica (Arduino Sensores Jumpers),10,Kits,,,2 por plantel piloto (5 planteles)
+Piloto (MVP),OpEx,Honorarios Personal Capacitador Externo (Talleres),1,Paquete,,,Capacitación para docentes y alumnos
+Piloto (MVP),OpEx,Combustible Vehículo Oficial (Valles Centrales),5,Visitas,0.00,0.00,Gestión Interna
+Piloto (MVP),OpEx,Hosting y Servidor (Portal cecyteo.edu.mx),1,Suscripción,0.00,0.00,Infraestructura Existente
+Piloto (MVP),OpEx,Licencias Discord,1,Servicio,0.00,0.00,Capa Gratuita
+Final Estatal,Evento,Alimentación (Comida Finalistas 6 a 12 equipos),60,Personas,,,Equipos de 5 pax máximo (4 alumnos + 1 tutor)
+Final Estatal,Evento,Transporte Finalistas Foráneos,5,Viajes,,,Sujeto a los planteles que clasifiquen
+Final Estatal,Evento,Sede y Logística Técnica (Internet Pantallas),1,Evento,,,1 día de duración
+Final Estatal,Evento,Reconocimientos y Estímulos Ganadores,3,Lugares,,,Trofeos o Kits avanzados
