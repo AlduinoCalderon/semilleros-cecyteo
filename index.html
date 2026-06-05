@@ -8,14 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00e5a0;
-            --primary-dim: rgba(0, 229, 160, 0.15);
+            --primary: #009A60; /* Verde institucional CECyTE */
+            --primary-dim: rgba(0, 154, 96, 0.15);
             --bg-base: #050b14;
             --bg-surface: rgba(16, 28, 44, 0.6);
-            --border-glass: rgba(0, 229, 160, 0.2);
+            --border-glass: rgba(0, 154, 96, 0.3);
             --text-main: #f0fdf4;
             --text-muted: #94a3b8;
-            --phase1: #10b981;
+            --phase1: #009A60;
             --phase2: #3b82f6;
             --phase3: #8b5cf6;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,7 +49,7 @@
             left: -10%;
             width: 70vw;
             height: 70vw;
-            background: radial-gradient(circle, rgba(0, 229, 160, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 154, 96, 0.06) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -108,15 +108,15 @@
 
         @keyframes pulse-anim {
             0% {
-                box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.4);
+                box-shadow: 0 0 0 0 rgba(0, 154, 96, 0.4);
             }
 
             70% {
-                box-shadow: 0 0 0 10px rgba(0, 229, 160, 0);
+                box-shadow: 0 0 0 10px rgba(0, 154, 96, 0);
             }
 
             100% {
-                box-shadow: 0 0 0 0 rgba(0, 229, 160, 0);
+                box-shadow: 0 0 0 0 rgba(0, 154, 96, 0);
             }
         }
 
@@ -444,6 +444,8 @@
     <div class="container">
 
         <header class="header reveal">
+            <img src="./CECyTE Logo.png" alt="CECyTE Logo" style="max-height: 80px; margin-bottom: 24px;">
+            <br>
             <div class="status-badge">
                 <div class="pulse"></div> Proyecto Estratégico Institucional
             </div>
@@ -581,11 +583,11 @@
     </div>
 
     <script>
-        // --- Particle System ---
+        // --- Constellation Particle System ---
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let W, H, particles;
-        const PARTICLE_COUNT = 50;
+        const PARTICLE_COUNT = 70; // Increased for better network effect
 
         function resize() {
             W = canvas.width = window.innerWidth;
@@ -596,24 +598,48 @@
             resize();
             particles = Array.from({ length: PARTICLE_COUNT }, () => ({
                 x: Math.random() * W, y: Math.random() * H,
-                vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
-                r: Math.random() * 1.5 + 0.5,
-                alpha: Math.random() * 0.5 + 0.1
+                vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8,
+                r: Math.random() * 2 + 0.5
             }));
         }
 
         function drawParticles() {
             ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = `rgba(0, 229, 160, 0.4)`;
+            
+            // Draw lines between nearby particles
+            ctx.lineWidth = 0.6;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        // Opacity decreases as distance increases
+                        const opacity = 0.3 - (dist / 130) * 0.3;
+                        ctx.strokeStyle = `rgba(0, 154, 96, ${opacity})`;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Move and draw particles
+            ctx.fillStyle = `rgba(0, 154, 96, 0.6)`;
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-                if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                
+                // Bounce off edges smoothly instead of teleporting
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fill();
             });
+
             requestAnimationFrame(drawParticles);
         }
         window.addEventListener('resize', resize);
