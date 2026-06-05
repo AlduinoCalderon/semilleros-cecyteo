@@ -1,15 +1,18 @@
 // --- Theme Toggle ---
 const themeBtn = document.getElementById('theme-toggle');
 const root = document.documentElement;
+const mainLogo = document.getElementById('main-logo');
 
 themeBtn.addEventListener('click', () => {
     const currentTheme = root.getAttribute('data-theme');
     if (currentTheme === 'light') {
         root.removeAttribute('data-theme');
         themeBtn.innerHTML = '☀️';
+        if (mainLogo) mainLogo.src = './Logo/Horizontal Letra Blanca.png';
     } else {
         root.setAttribute('data-theme', 'light');
         themeBtn.innerHTML = '🌙';
+        if (mainLogo) mainLogo.src = './Logo/Horizontal.png';
     }
 });
 
