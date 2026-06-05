@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -20,7 +21,12 @@
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             font-family: 'Outfit', sans-serif;
@@ -39,9 +45,11 @@
 
         .ambient-glow {
             position: fixed;
-            top: -20%; left: -10%;
-            width: 70vw; height: 70vw;
-            background: radial-gradient(circle, rgba(0,229,160,0.05) 0%, transparent 70%);
+            top: -20%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(0, 229, 160, 0.05) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -60,14 +68,18 @@
             transform: translateY(30px);
             transition: var(--transition);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
         /* Header */
-        .header { text-align: center; margin-bottom: 80px; }
-        
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -86,7 +98,8 @@
         }
 
         .pulse {
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             background: var(--primary);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--primary);
@@ -94,9 +107,17 @@
         }
 
         @keyframes pulse-anim {
-            0% { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 229, 160, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 229, 160, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 229, 160, 0);
+            }
         }
 
         .header h1 {
@@ -137,11 +158,14 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .context-box::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
             background: var(--primary);
             border-radius: 4px 0 0 4px;
         }
@@ -166,6 +190,7 @@
             align-items: center;
             gap: 16px;
         }
+
         .framework-title::after {
             content: '';
             flex: 1;
@@ -176,10 +201,13 @@
         .timeline {
             position: relative;
         }
+
         .timeline::before {
             content: '';
             position: absolute;
-            left: 24px; top: 0; bottom: 0;
+            left: 24px;
+            top: 0;
+            bottom: 0;
             width: 2px;
             background: linear-gradient(to bottom, var(--phase1), var(--phase2), var(--phase3));
             opacity: 0.3;
@@ -193,8 +221,10 @@
 
         .phase-node {
             position: absolute;
-            left: 0; top: 0;
-            width: 50px; height: 50px;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
             border-radius: 16px;
             background: var(--bg-surface);
             border: 1px solid;
@@ -206,11 +236,28 @@
             backdrop-filter: blur(10px);
         }
 
-        .phase-1 .phase-node { border-color: var(--phase1); color: var(--phase1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
-        .phase-2 .phase-node { border-color: var(--phase2); color: var(--phase2); box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
-        .phase-3 .phase-node { border-color: var(--phase3); color: var(--phase3); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+        .phase-1 .phase-node {
+            border-color: var(--phase1);
+            color: var(--phase1);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
 
-        .phase-header { margin-bottom: 24px; }
+        .phase-2 .phase-node {
+            border-color: var(--phase2);
+            color: var(--phase2);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .phase-3 .phase-node {
+            border-color: var(--phase3);
+            color: var(--phase3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .phase-header {
+            margin-bottom: 24px;
+        }
+
         .phase-tag {
             font-size: 0.7rem;
             text-transform: uppercase;
@@ -219,15 +266,25 @@
             margin-bottom: 8px;
             display: inline-block;
         }
-        .phase-1 .phase-tag { color: var(--phase1); }
-        .phase-2 .phase-tag { color: var(--phase2); }
-        .phase-3 .phase-tag { color: var(--phase3); }
+
+        .phase-1 .phase-tag {
+            color: var(--phase1);
+        }
+
+        .phase-2 .phase-tag {
+            color: var(--phase2);
+        }
+
+        .phase-3 .phase-tag {
+            color: var(--phase3);
+        }
 
         .phase-header h2 {
             font-size: 1.5rem;
             color: #fff;
             margin-bottom: 8px;
         }
+
         .phase-header p {
             color: var(--text-muted);
             font-size: 0.95rem;
@@ -241,7 +298,7 @@
 
         .action-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             padding: 24px;
             transition: var(--transition);
@@ -253,32 +310,52 @@
         .action-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
         }
 
-        .action-card:hover::before, .action-card:active::before { opacity: 1; }
-        
+        .action-card:hover::before,
+        .action-card:active::before {
+            opacity: 1;
+        }
+
         .action-card:active {
             transform: scale(0.97);
             border-color: var(--border-glass);
         }
 
         .icon-box {
-            width: 40px; height: 40px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2rem;
             margin-bottom: 16px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .phase-1 .icon-box { color: var(--phase1); background: rgba(16, 185, 129, 0.1); }
-        .phase-2 .icon-box { color: var(--phase2); background: rgba(59, 130, 246, 0.1); }
-        .phase-3 .icon-box { color: var(--phase3); background: rgba(139, 92, 246, 0.1); }
+        .phase-1 .icon-box {
+            color: var(--phase1);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .phase-2 .icon-box {
+            color: var(--phase2);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .phase-3 .icon-box {
+            color: var(--phase3);
+            background: rgba(139, 92, 246, 0.1);
+        }
 
         .action-card h4 {
             color: #fff;
@@ -310,7 +387,7 @@
             font-weight: 800;
             color: #fff;
             margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .metric-label {
@@ -322,205 +399,252 @@
         }
 
         @media (max-width: 600px) {
-            .container { padding: 40px 20px 100px; }
-            .timeline::before { left: 20px; }
-            .phase { padding-left: 56px; margin-bottom: 48px; }
-            .phase-node { width: 40px; height: 40px; font-size: 1.2rem; }
-            .action-grid { grid-template-columns: 1fr; }
-            .metrics-banner { grid-template-columns: 1fr; gap: 8px; }
-            .metric-item { background: var(--bg-surface); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+            .container {
+                padding: 40px 20px 100px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .phase {
+                padding-left: 56px;
+                margin-bottom: 48px;
+            }
+
+            .phase-node {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-banner {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .metric-item {
+                background: var(--bg-surface);
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="ambient-glow"></div>
-<canvas id="particles-canvas"></canvas>
+    <div class="ambient-glow"></div>
+    <canvas id="particles-canvas"></canvas>
 
-<div class="container">
-    
-    <header class="header reveal">
-        <div class="status-badge"><div class="pulse"></div> Proyecto Estratégico Institucional</div>
-        <h1>CECyTE Maker</h1>
-        <p>Ecosistema de innovación integral diseñado para detonar el talento tecnológico y el desarrollo de nuestros estudiantes en todos los planteles.</p>
-    </header>
+    <div class="container">
 
-    <div class="glass-card context-box reveal">
-        <h3>Visión del Proyecto</h3>
-        <p>Establecer un modelo estandarizado y las herramientas necesarias para crear y hacer crecer comunidades de alumnos apasionados por la tecnología. El propósito fundamental es facilitar los espacios físicos, las plataformas digitales y la organización institucional para que la creatividad y el talento de los jóvenes se conviertan en el motor de su propio futuro.</p>
+        <header class="header reveal">
+            <div class="status-badge">
+                <div class="pulse"></div> Proyecto Estratégico Institucional
+            </div>
+            <h1>CECyTE Maker</h1>
+            <p>Ecosistema de innovación integral diseñado para detonar el talento tecnológico y el desarrollo de
+                nuestros estudiantes en todos los planteles.</p>
+        </header>
+
+        <div class="glass-card context-box reveal">
+            <h3>Visión del Proyecto</h3>
+            <p>Establecer un modelo estandarizado y las herramientas necesarias para crear y hacer crecer comunidades de
+                alumnos apasionados por la tecnología. El propósito fundamental es facilitar los espacios físicos, las
+                plataformas digitales y la organización institucional para que la creatividad y el talento de los
+                jóvenes se conviertan en el motor de su propio futuro.</p>
+        </div>
+
+        <div class="framework-title reveal">
+            <span>Framework de Implementación</span>
+        </div>
+
+        <div class="timeline">
+
+            <!-- FASE 1 -->
+            <div class="phase phase-1 reveal">
+                <div class="phase-node">1</div>
+                <div class="phase-header">
+                    <span class="phase-tag">Fundación del Programa</span>
+                    <h2>Bases y Espacios</h2>
+                    <p>Establecimiento de las condiciones físicas y organizativas fundamentales en cada plantel para
+                        iniciar las comunidades.</p>
+                </div>
+                <div class="action-grid">
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🏫</div>
+                        <h4>Espacios Maker</h4>
+                        <p>Acondicionamiento de laboratorios o aulas colaborativas con las herramientas necesarias para
+                            que los alumnos puedan experimentar e inventar.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🆔</div>
+                        <h4>Identidad Digital</h4>
+                        <p>Creación de perfiles institucionales para que cada estudiante comience a construir un
+                            portafolio profesional desde sus primeros proyectos.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">👩‍🏫</div>
+                        <h4>Docentes Enlace</h4>
+                        <p>Selección y capacitación de profesores guía que servirán como motivadores y puentes clave de
+                            apoyo directo para los estudiantes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 2 -->
+            <div class="phase phase-2 reveal">
+                <div class="phase-node">2</div>
+                <div class="phase-header">
+                    <span class="phase-tag">Operación y Dinamización</span>
+                    <h2>Plataformas y Actividades</h2>
+                    <p>Puesta en marcha de las iniciativas que mantendrán a los estudiantes motivados, compitiendo y
+                        aprendiendo de los mejores.</p>
+                </div>
+                <div class="action-grid">
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🌐</div>
+                        <h4>Plataforma Central</h4>
+                        <p>Lanzamiento de un sitio web institucional donde los alumnos podrán enterarse de
+                            convocatorias, retos y mostrar los proyectos que han creado.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">⏱️</div>
+                        <h4>Hackatones y Retos</h4>
+                        <p>Organización de competencias de desarrollo tecnológico donde los alumnos resuelven
+                            problemáticas reales de su comunidad trabajando en equipo.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🤝</div>
+                        <h4>Red de Mentoría</h4>
+                        <p>Sistema estructurado para conectar a nuestros talentos emergentes con profesionales y
+                            expertos externos que los puedan aconsejar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 3 -->
+            <div class="phase phase-3 reveal">
+                <div class="phase-node">3</div>
+                <div class="phase-header">
+                    <span class="phase-tag">Proyección de Vida</span>
+                    <h2>Inspiración y Futuro</h2>
+                    <p>Consolidación del ecosistema para transformar la perspectiva de los estudiantes, motivándolos a
+                        continuar su formación en el nivel superior.</p>
+                </div>
+                <div class="action-grid">
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🎯</div>
+                        <h4>Descubrimiento de Pasión</h4>
+                        <p>Creación de grupos enfocados en áreas fascinantes como Inteligencia Artificial o Robótica,
+                            donde descubren su vocación a través de la creación.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🌟</div>
+                        <h4>Proyección Transformadora</h4>
+                        <p>Impulsar proyectos que resuelvan problemas de su entorno, demostrándoles que la tecnología es
+                            una herramienta real para cambiar su vida y su comunidad.</p>
+                    </div>
+                    <div class="action-card card-hover">
+                        <div class="icon-box">🎓</div>
+                        <h4>Continuidad Académica</h4>
+                        <p>Sembrar una convicción tan fuerte que sean los mismos jóvenes quienes busquen llegar a la
+                            universidad, decididos a potenciar su talento para convertirse en verdaderos agentes de
+                            cambio.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Impact Pillars Section -->
+        <div class="metrics-banner reveal">
+            <div class="metric-item">
+                <div class="metric-val">💡</div>
+                <div class="metric-label">Inspirar Vocaciones</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-val">🛠️</div>
+                <div class="metric-label">Crear Soluciones</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-val">🚀</div>
+                <div class="metric-label">Transformar Futuros</div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="framework-title reveal">
-        <span>Framework de Implementación</span>
-    </div>
+    <script>
+        // --- Particle System ---
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles;
+        const PARTICLE_COUNT = 50;
 
-    <div class="timeline">
-        
-        <!-- FASE 1 -->
-        <div class="phase phase-1 reveal">
-            <div class="phase-node">1</div>
-            <div class="phase-header">
-                <span class="phase-tag">Fundación del Programa</span>
-                <h2>Bases y Espacios</h2>
-                <p>Establecimiento de las condiciones físicas y organizativas fundamentales en cada plantel para iniciar las comunidades.</p>
-            </div>
-            <div class="action-grid">
-                <div class="action-card card-hover">
-                    <div class="icon-box">🏫</div>
-                    <h4>Espacios Maker</h4>
-                    <p>Acondicionamiento de laboratorios o aulas colaborativas con las herramientas necesarias para que los alumnos puedan experimentar e inventar.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">🆔</div>
-                    <h4>Identidad Digital</h4>
-                    <p>Creación de perfiles institucionales para que cada estudiante comience a construir un portafolio profesional desde sus primeros proyectos.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">👩‍🏫</div>
-                    <h4>Docentes Enlace</h4>
-                    <p>Selección y capacitación de profesores guía que servirán como motivadores y puentes clave de apoyo directo para los estudiantes.</p>
-                </div>
-            </div>
-        </div>
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
 
-        <!-- FASE 2 -->
-        <div class="phase phase-2 reveal">
-            <div class="phase-node">2</div>
-            <div class="phase-header">
-                <span class="phase-tag">Operación y Dinamización</span>
-                <h2>Plataformas y Actividades</h2>
-                <p>Puesta en marcha de las iniciativas que mantendrán a los estudiantes motivados, compitiendo y aprendiendo de los mejores.</p>
-            </div>
-            <div class="action-grid">
-                <div class="action-card card-hover">
-                    <div class="icon-box">🌐</div>
-                    <h4>Plataforma Central</h4>
-                    <p>Lanzamiento de un sitio web institucional donde los alumnos podrán enterarse de convocatorias, retos y mostrar los proyectos que han creado.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">⏱️</div>
-                    <h4>Hackatones y Retos</h4>
-                    <p>Organización de competencias de desarrollo tecnológico donde los alumnos resuelven problemáticas reales de su comunidad trabajando en equipo.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">🤝</div>
-                    <h4>Red de Mentoría</h4>
-                    <p>Sistema estructurado para conectar a nuestros talentos emergentes con profesionales y expertos externos que los puedan aconsejar.</p>
-                </div>
-            </div>
-        </div>
+        function initParticles() {
+            resize();
+            particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+                x: Math.random() * W, y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+                r: Math.random() * 1.5 + 0.5,
+                alpha: Math.random() * 0.5 + 0.1
+            }));
+        }
 
-        <!-- FASE 3 -->
-        <div class="phase phase-3 reveal">
-            <div class="phase-node">3</div>
-            <div class="phase-header">
-                <span class="phase-tag">Proyección de Vida</span>
-                <h2>Inspiración y Futuro</h2>
-                <p>Consolidación del ecosistema para transformar la perspectiva de los estudiantes, motivándolos a continuar su formación en el nivel superior.</p>
-            </div>
-            <div class="action-grid">
-                <div class="action-card card-hover">
-                    <div class="icon-box">🎯</div>
-                    <h4>Descubrimiento de Pasión</h4>
-                    <p>Creación de grupos enfocados en áreas fascinantes como Inteligencia Artificial o Robótica, donde descubren su vocación a través de la creación.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">🌟</div>
-                    <h4>Proyección Transformadora</h4>
-                    <p>Impulsar proyectos que resuelvan problemas de su entorno, demostrándoles que la tecnología es una herramienta real para cambiar su vida y su comunidad.</p>
-                </div>
-                <div class="action-card card-hover">
-                    <div class="icon-box">🎓</div>
-                    <h4>Continuidad Académica</h4>
-                    <p>Sembrar una convicción tan fuerte que sean los mismos jóvenes quienes busquen llegar a la universidad, decididos a potenciar su talento para convertirse en verdaderos agentes de cambio.</p>
-                </div>
-            </div>
-        </div>
+        function drawParticles() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = `rgba(0, 229, 160, 0.4)`;
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
 
-    </div>
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawParticles);
+        }
+        window.addEventListener('resize', resize);
+        initParticles();
+        drawParticles();
 
-    <!-- Impact Pillars Section -->
-    <div class="metrics-banner reveal">
-        <div class="metric-item">
-            <div class="metric-val">💡</div>
-            <div class="metric-label">Inspirar Vocaciones</div>
-        </div>
-        <div class="metric-item">
-            <div class="metric-val">🛠️</div>
-            <div class="metric-label">Crear Soluciones</div>
-        </div>
-        <div class="metric-item">
-            <div class="metric-val">🚀</div>
-            <div class="metric-label">Transformar Futuros</div>
-        </div>
-    </div>
+        // --- Intersection Observer for Scroll Animations ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 
-</div>
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
 
-<script>
-// --- Particle System ---
-const canvas = document.getElementById('particles-canvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles;
-const PARTICLE_COUNT = 50;
+        revealElements.forEach(el => revealObserver.observe(el));
 
-function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-}
-
-function initParticles() {
-    resize();
-    particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
-        r: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.5 + 0.1
-    }));
-}
-
-function drawParticles() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = `rgba(0, 229, 160, 0.4)`;
-    particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-        
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-    });
-    requestAnimationFrame(drawParticles);
-}
-window.addEventListener('resize', resize);
-initParticles();
-drawParticles();
-
-// --- Intersection Observer for Scroll Animations ---
-const revealElements = document.querySelectorAll('.reveal');
-const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-    });
-}, revealOptions);
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-// --- Hover Glow Effect on Cards (for desktop mostly, but adds flair) ---
-const cards = document.querySelectorAll('.card-hover');
-cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    });
-});
-</script>
+        // --- Hover Glow Effect on Cards (for desktop mostly, but adds flair) ---
+        const cards = document.querySelectorAll('.card-hover');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+    </script>
 
 </body>
+
 </html>
