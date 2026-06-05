@@ -471,3 +471,59 @@ body {
         border: 1px solid var(--card-border);
     }
 }
+
+/* --- Rocket Animation --- */
+#rocket-btn {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#rocket-btn:hover {
+    transform: scale(1.2) translateY(-5px);
+}
+
+.flying-rocket {
+    position: fixed !important;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.flying-rocket::after, .flying-rocket::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        0 5px 10px rgba(255, 255, 255, 0.8), 
+        -5px 15px 15px rgba(200, 200, 200, 0.6),
+        5px 15px 15px rgba(200, 200, 200, 0.6);
+    animation: smoke-puff 0.5s infinite;
+    filter: blur(1px);
+    z-index: -1;
+}
+
+.flying-rocket::before {
+    animation: smoke-puff 0.3s infinite reverse;
+    bottom: -15px;
+    width: 12px;
+    height: 12px;
+    background: rgba(200, 200, 200, 0.5);
+}
+
+@keyframes smoke-puff {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(2) translateY(15px);
+        opacity: 0;
+    }
+}
+

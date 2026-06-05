@@ -119,3 +119,138 @@ cards.forEach(card => {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     });
 });
+
+// --- Rocket Back to Top ---
+const rocketBtn = document.getElementById('rocket-btn');
+if (rocketBtn && themeBtn) {
+    rocketBtn.addEventListener('click', () => {
+        if (rocketBtn.classList.contains('launching')) return;
+        rocketBtn.classList.add('launching');
+
+        const rocketRect = rocketBtn.getBoundingClientRect();
+        const themeRect = themeBtn.getBoundingClientRect();
+
+        const flyingRocket = document.createElement('div');
+        flyingRocket.className = 'flying-rocket';
+        flyingRocket.style.left = rocketRect.left + 'px';
+        flyingRocket.style.top = rocketRect.top + 'px';
+        flyingRocket.style.width = rocketRect.width + 'px';
+        flyingRocket.style.height = rocketRect.height + 'px';
+        
+        const innerRocket = document.createElement('div');
+        innerRocket.innerHTML = rocketBtn.innerHTML;
+        innerRocket.style.transform = 'rotate(-45deg)';
+        innerRocket.style.fontSize = window.getComputedStyle(rocketBtn).fontSize;
+        innerRocket.style.display = 'flex';
+        innerRocket.style.justifyContent = 'center';
+        innerRocket.style.alignItems = 'center';
+        innerRocket.style.width = '100%';
+        innerRocket.style.height = '100%';
+        
+        flyingRocket.appendChild(innerRocket);
+        document.body.appendChild(flyingRocket);
+
+        // Hide original
+        rocketBtn.style.opacity = '0';
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Calculate path
+        const deltaX = themeRect.left - rocketRect.left;
+        const deltaY = themeRect.top - rocketRect.top;
+        const distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+
+        const nx = -deltaY / distance;
+        const ny = deltaX / distance;
+
+        const keyframes = [];
+
+        // Phase 1: Straighten and Vibrate (0% to 15%)
+        const vibrateSteps = 15;
+        for (let i = 0; i <= vibrateSteps; i++) {
+            const p = i / vibrateSteps;
+            const offset = p * 0.15;
+            
+            // Straighten from 45deg (original visual orientation) to 0deg (forward is UP)
+            const rotation = 45 * (1 - p); 
+            
+            const shakeX = i === vibrateSteps ? 0 : (Math.random() - 0.5) * 8;
+            const shakeY = i === vibrateSteps ? 0 : (Math.random() - 0.5) * 8;
+            
+            keyframes.push({
+                transform: `translate(${shakeX}px, ${shakeY}px) rotate(${rotation}deg) scale(1)`,
+                opacity: 1,
+                offset: offset
+            });
+        }
+
+        let prevX = 0;
+        let prevY = 0;
+        let prevRotation = 0; // Starts flight pointing straight UP
+
+        // Phase 2: Erratic flight all over the screen
+        const flightSteps = 80;
+        for (let i = 1; i <= flightSteps; i++) {
+            const p = i / flightSteps; // 0 to 1
+            const offset = 0.15 + p * 0.85; // 0.15 to 1.0
+            
+            const easeP = p * p; // Quadratic ease-in
+            
+            const baseX = deltaX * easeP;
+            const baseY = deltaY * easeP;
+            
+            // Huge erratic waves sweeping across the screen
+            const maxAmplitude = window.innerWidth * 0.45;
+            const amplitude = maxAmplitude * Math.sin(p * Math.PI); 
+            const wave = amplitude * Math.sin(p * Math.PI * 5); 
+            
+            const secondaryAmplitude = window.innerHeight * 0.25 * Math.sin(p * Math.PI);
+            const secondaryWave = secondaryAmplitude * Math.cos(p * Math.PI * 7);
+            
+            const targetX = baseX + nx * wave + ny * secondaryWave;
+            const targetY = baseY + ny * wave - nx * secondaryWave;
+            
+            const dx = targetX - prevX;
+            const dy = targetY - prevY;
+            
+            let rotation = prevRotation;
+            if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+                const angleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
+                // +90 because Math.atan2(-1,0) is -90 for UP, and our 0deg is UP
+                rotation = angleDeg + 90;
+                
+                while (rotation - prevRotation > 180) rotation -= 360;
+                while (rotation - prevRotation < -180) rotation += 360;
+                
+                prevRotation = rotation;
+            }
+            
+            const scale = 1 - (p * 0.5); // scale down to 0.5
+            const opacity = p > 0.9 ? 1 - ((p - 0.9) * 10) : 1;
+
+            keyframes.push({
+                transform: `translate(${targetX}px, ${targetY}px) rotate(${rotation}deg) scale(${scale})`,
+                opacity: opacity,
+                offset: offset
+            });
+            
+            prevX = targetX;
+            prevY = targetY;
+        }
+
+        const duration = 5500; // 5.5 seconds total to fly all over
+
+        const animation = flyingRocket.animate(keyframes, {
+            duration: duration,
+            easing: 'linear', 
+            fill: 'forwards'
+        });
+
+        animation.onfinish = () => {
+            flyingRocket.remove();
+            rocketBtn.style.opacity = '1';
+            rocketBtn.classList.remove('launching');
+        };
+    });
+}
